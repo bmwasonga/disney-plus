@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../Header/Header';
 import {
   Container,
   Content,
@@ -13,6 +14,7 @@ import {
 function Login(props) {
   return (
     <Container>
+      <Header></Header>
       <Content>
         <CTA>
           <CTAlogoOne src="/images/cta-logo-one.svg" alt="logo one" />
