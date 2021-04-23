@@ -10,7 +10,8 @@ function Header(props) {
         </Logo>
         <NavMenu>
           <a href="/home">
-            <img src="/images/home-icon.svg" alt="HOME" /> home
+            <img src="/images/home-icon.svg" alt="HOME" />
+            <span>HOME</span>
           </a>
         </NavMenu>
         <Button>Login</Button>
