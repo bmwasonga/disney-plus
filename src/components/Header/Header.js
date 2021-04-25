@@ -1,7 +1,33 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { auth, provider } from '../Firebase/Firebase';
 import { Container, Logo, Button, NavMenu } from './styles/style';
-
+import {
+  selectUserEmail,
+  selectUserName,
+  selectUserPhoto,
+} from '../../Features/Users/UserSlice';
 function Header(props) {
+  //necessry to have
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const userName = useSelector(selectUserName);
+  const userEmail = useSelector(selectUserEmail);
+  const userPhoto = useSelector(selectUserPhoto);
+
+  // including a function to handle authentication with a pop up
+  function handleAuth() {
+    auth
+      .signInWithPopup(provider)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }
+
   return (
     <>
       <Container>
@@ -34,7 +60,7 @@ function Header(props) {
             <span>SERIES</span>
           </a>
         </NavMenu>
-        <Button>Login</Button>
+        <Button onClick={handleAuth}>Login</Button>
       </Container>
     </>
   );
