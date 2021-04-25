@@ -40,4 +40,6 @@ function Header(props) {
   );
 }
 
+// ensure youinclude the pages for the navigation items
+
 export default Header;

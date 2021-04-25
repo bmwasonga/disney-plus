@@ -90,4 +90,18 @@ export const NavMenu = styled.div`
   }
 `;
 
-export const Button = styled.button``;
+export const Button = styled.a`
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid #f9f9f9;
+  border-radius: 3px;
+  transition: 2ms ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f9f9f9;
+    color: #090b13;
+  }
+`;
