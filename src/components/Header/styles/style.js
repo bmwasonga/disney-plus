@@ -22,6 +22,7 @@ export const Logo = styled.a`
   max-height: 70px;
   font-size: 0;
   display: inline-block;
+  cursor: pointer;
 
   img {
     display: block;
@@ -104,4 +105,8 @@ export const Button = styled.a`
     background-color: #f9f9f9;
     color: #090b13;
   }
+`;
+
+export const UserImage = styled.img`
+  height: 100%;
 `;
