@@ -110,3 +110,36 @@ export const Button = styled.a`
 export const UserImage = styled.img`
   height: 100%;
 `;
+
+export const Dropdown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 6px;
+  background: rgba(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0 /50%) 0px 0px 18px 0px;
+  padding: 10px;
+  width: 100px;
+  letter-spacing: 0;
+  opacity: 0;
+`;
+
+export const SignOut = styled.div`
+  position: relative;
+  height: 80%;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  ${UserImage} {
+    border-radius: 50%;
+  }
+  &:hover {
+    ${Dropdown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
+`;

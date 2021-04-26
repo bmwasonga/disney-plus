@@ -2,12 +2,21 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { auth, provider } from '../Firebase/Firebase';
-import { Container, Logo, Button, NavMenu, UserImage } from './styles/style';
+import {
+  Container,
+  Logo,
+  Button,
+  NavMenu,
+  UserImage,
+  SignOut,
+  Dropdown,
+} from './styles/style';
 import {
   selectUserEmail,
   selectUserName,
   selectUserPhoto,
   setUserLoginDetails,
+  setSignOutState,
 } from '../../Features/Users/UserSlice';
 function Header(props) {
   //necessry to have
@@ -19,16 +28,36 @@ function Header(props) {
 
   // including a function to handle authentication with a pop up
   function handleAuth() {
-    auth
-      .signInWithPopup(provider)
-      .then((res) => {
-        setUser(res.user);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    if (!userName) {
+      auth
+        .signInWithPopup(provider)
+        .then((res) => {
+          setUser(res.user);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    } else if (userName) {
+      auth
+        .signOut()
+        .then(() => {
+          dispatch(setSignOutState());
+          history.push('/');
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
   }
-  //useEffect
+  //useEffect that will change to the home page when the user signs in
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        history.push('/home');
+      }
+    });
+  }, [userName]);
 
   //function to set user
   const setUser = (user) => {
@@ -78,7 +107,12 @@ function Header(props) {
                 <span>SERIES</span>
               </a>
             </NavMenu>
-            <UserImage src={userPhoto} alt={userName} />
+            <SignOut>
+              <UserImage src={userPhoto} alt={userName} />
+              <Dropdown>
+                <span onClick={handleAuth}>SignOut</span>
+              </Dropdown>
+            </SignOut>
           </>
         )}
       </Container>
